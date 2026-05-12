@@ -1,0 +1,26 @@
+# Custom ignores
+unwanted/
+unwanted
+
+# .NET Core
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.user
+*.suo
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Node.js (for frontend)
+node_modules/
+dist/
+build/
+.env
+
+# OS Files
+.DS_Store
+Thumbs.db
