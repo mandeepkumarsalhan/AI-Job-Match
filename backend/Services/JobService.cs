@@ -1,20 +1,32 @@
 using backend.Models;
-
+using backend.Interface;
+using backend.Data;
+using backend.DTOs;
+using Microsoft.EntityFrameworkCore;
 namespace backend.Services;
 
-public class JobService
+public class JobService : IJobService
 {
-    private static List<Job> _jobs = new();
-
-    public List<Job> GetAll()
+    private readonly AppDbContext _context;
+    public JobService(AppDbContext context)
     {
-        return _jobs;
+        _context = context;
     }
-
-    public Job Add(Job job)
+    public async Task<List<Job>> GetAllJobsAsync()
     {
-        job.Id = _jobs.Count + 1;
-        _jobs.Add(job);
+        return await _context.Jobs.ToListAsync();
+    }
+    public async Task<Job> CreateJobAsync(CreateJobDto dto)
+    {
+        var job = new Job
+        {
+            Title = dto.Title,
+            Company = dto.Company,
+            Location = dto.Location,
+            Description = dto.Description
+        };
+        _context.Jobs.Add(job);
+        await _context.SaveChangesAsync();
         return job;
     }
 }

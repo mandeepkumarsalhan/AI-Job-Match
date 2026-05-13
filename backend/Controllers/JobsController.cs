@@ -1,36 +1,30 @@
 using backend.Services;
 using backend.Models;
 using backend.DTOs;
+using backend.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers;
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/jobs")]
 public class JobsController : ControllerBase
 {
-    private readonly JobService _jobService;
+    private readonly IJobService _jobService;
 
-    public JobsController()
+    public JobsController(IJobService jobService)
     {
-        _jobService = new JobService();
+        _jobService = jobService;
     }
     [HttpGet]
-    public IActionResult GetJobs()
+    public async Task<IActionResult> GetJobs()
     {
-        return Ok(_jobService.GetAll());
+        var jobs = await _jobService.GetAllJobsAsync();
+        return Ok(jobs);
     }
     [HttpPost]
-    public IActionResult CreateJob(CreateJobDto dto)
+    public async Task<IActionResult> CreateJob(CreateJobDto dto)
     {
-        var job = new Job
-        {
-            Title = dto.Title,
-            Company = dto.Company,
-            Location = dto.Location,
-            Description = dto.Description
-        };
-
-        var result = _jobService.Add(job);
+        var result = await _jobService.CreateJobAsync(dto);
         return Ok(result);
     }
 }
