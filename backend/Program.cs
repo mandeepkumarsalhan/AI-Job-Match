@@ -2,6 +2,7 @@ using System.Linq;
 using backend.Data;
 using backend.Interface;
 using backend.Services;
+using backend.Integrations;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>{
     options.UseSqlite("Data Source=Data/app.db");
 });
 builder.Services.AddScoped<IJobService,JobService>();
+builder.Services.AddHttpClient<NavApiService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

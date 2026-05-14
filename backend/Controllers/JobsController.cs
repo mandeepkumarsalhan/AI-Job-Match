@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers;
 [ApiController]
-[Route("api/jobs")]
+[Route("api/[controller]")]
 public class JobsController : ControllerBase
 {
     private readonly IJobService _jobService;
