@@ -7,4 +7,5 @@ public interface IJobService
 {
     Task<List<Job>> GetAllJobsAsync();
     Task<Job> CreateJobAsync(CreateJobDto dto);
+    Task<Job?> GetJobByIdAsync(int id);
 }

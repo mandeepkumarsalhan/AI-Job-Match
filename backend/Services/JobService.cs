@@ -29,4 +29,8 @@ public class JobService : IJobService
         await _context.SaveChangesAsync();
         return job;
     }
+    public async Task<Job?> GetJobByIdAsync(int id)
+    {
+        return await _context.Jobs.FirstOrDefaultAsync(j =>j.Id == id);
+    }
 }

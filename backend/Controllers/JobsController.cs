@@ -27,4 +27,14 @@ public class JobsController : ControllerBase
         var result = await _jobService.CreateJobAsync(dto);
         return Ok(result);
     }
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetJobById(int id)
+    {
+        var job = await _jobService.GetJobByIdAsync(id);
+        if(job == null)
+        {
+            return NotFound();
+        }
+        return Ok(job);
+    }
 }
