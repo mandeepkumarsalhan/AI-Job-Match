@@ -15,10 +15,9 @@ public class NavJobsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetNavJobs()
+    public async Task<IActionResult> Get()
     {
         var jobs = await _navApiService.GetJobsAsync();
-
         return Ok(jobs);
     }
 }
