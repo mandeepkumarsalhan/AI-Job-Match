@@ -15,7 +15,11 @@ public class NavJobsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get([FromQuery] string? city,[FromQuery] string? search)
+    public async Task<IActionResult> Get(
+        [FromQuery] string? city,
+        [FromQuery] string? search,
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 10)
     {
         var jobs = await _navApiService.GetJobsAsync();
         if(!string.IsNullOrWhiteSpace(city))
@@ -30,6 +34,18 @@ public class NavJobsController : ControllerBase
             j.Title.Contains(search, StringComparison.OrdinalIgnoreCase)
             ).ToList();
         }
-        return Ok(jobs);
+        var totalItems = jobs.Count();
+        var pageJobs = jobs
+                .Skip((page -1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+        return Ok(new
+        {
+            totalItems,
+            page,
+            pageSize,
+            totalPages = (int)Math.Ceiling(totalItems / (double)pageSize),
+            data = pageJobs
+        });
     }
 }
