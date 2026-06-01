@@ -15,6 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>{
 });
 builder.Services.AddScoped<IJobService,JobService>();
 builder.Services.AddHttpClient<NavApiService>();
+builder.Services.AddScoped<JobMatchService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
