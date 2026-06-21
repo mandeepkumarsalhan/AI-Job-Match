@@ -1,3 +1,4 @@
+using backend.DTOs;
 using backend.Integrations;
 using backend.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -23,5 +24,15 @@ public class MatchController : ControllerBase
         var jobs = await _navApiService.GetJobsAsync();
         var result = _matchService.MatchJobs(jobs,profile);
         return Ok(result);
+    }
+    [HttpPost("skills")]
+    public async Task<IActionResult> MatchSkills(
+        SkillMatchResultDto request)
+    {
+        var jobs = await _navApiService.GetJobsAsync();
+        var result = _matchService.MatchBySkills(
+            jobs,
+            request.MatchedSkills);
+         return Ok(result);
     }
 }

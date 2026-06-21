@@ -13,13 +13,14 @@ public class NavApiService
 
     public async Task<List<NavJobDto>> GetJobsAsync()
     {
-        var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJuYXYudGVhbS5hcmJlaWRzcGxhc3NlbkBuYXYubm8iLCJraWQiOiI5YTY2OTc2MS1hMmFhLTQ2YjQtOWZkNi0yYTQ5YmNjZjJmNjUiLCJpc3MiOiJuYXYtbm8iLCJhdWQiOiJmZWVkLWFwaS12MiIsImlhdCI6MTc3OTA0ODA4MywiZXhwIjoxNzgyMDcyMDgzfQ.NNY5QIRpCGEcUWH6Ty_CZjg2C3-N5f6fIbZ2UIa31D8";
+        var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJuYXYudGVhbS5hcmJlaWRzcGxhc3NlbkBuYXYubm8iLCJraWQiOiI5YTY2OTc2MS1hMmFhLTQ2YjQtOWZkNi0yYTQ5YmNjZjJmNjUiLCJpc3MiOiJuYXYtbm8iLCJhdWQiOiJmZWVkLWFwaS12MiIsImlhdCI6MTc4MTI2OTExOCwiZXhwIjoxNzg0MjkzMTE4fQ.x0qEOjDyWQpT6aw4Q0RW1VQEUHtYqXFzoVygHraXI6s";
         _httpClient.DefaultRequestHeaders.Authorization =
         new System.Net.Http.Headers.AuthenticationHeaderValue(
             "Bearer",
             token);
 
         var response = await _httpClient.GetAsync(
+            //https://pam-stilling-feed.nav.no/api/publicToken , find new public token
             "https://pam-stilling-feed.nav.no/api/v1/feed"
         );
         response.EnsureSuccessStatusCode();
@@ -37,7 +38,7 @@ public class NavApiService
         {
             Title = job.Title,
             Company = job.FeedEntry?.BusinessName ?? "Unknown",
-    Location = job.FeedEntry?.Municipal ?? "Unknown"
+            Location = job.FeedEntry?.Municipal ?? "Unknown"
         }).ToList();
     }
 }
