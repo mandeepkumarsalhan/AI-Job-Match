@@ -18,6 +18,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>{
 builder.Services.AddScoped<IJobService,JobService>();
 builder.Services.AddHttpClient<NavApiService>();
 builder.Services.AddScoped<JobMatchService>();
+builder.Services.AddScoped<SkillExtractionService>();
 builder.Services.AddCors(options =>
 {
 options.AddPolicy("AllowFrontend",
