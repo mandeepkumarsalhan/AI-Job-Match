@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<PdfService>();
 //Mapping
 builder.Services.AddDbContext<AppDbContext>(options =>{
     options.UseSqlite("Data Source=Data/app.db");
