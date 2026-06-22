@@ -13,7 +13,7 @@ public class NavApiService
 
     public async Task<List<NavJobDto>> GetJobsAsync()
     {
-        var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJuYXYudGVhbS5hcmJlaWRzcGxhc3NlbkBuYXYubm8iLCJraWQiOiI5YTY2OTc2MS1hMmFhLTQ2YjQtOWZkNi0yYTQ5YmNjZjJmNjUiLCJpc3MiOiJuYXYtbm8iLCJhdWQiOiJmZWVkLWFwaS12MiIsImlhdCI6MTc4MTI2OTExOCwiZXhwIjoxNzg0MjkzMTE4fQ.x0qEOjDyWQpT6aw4Q0RW1VQEUHtYqXFzoVygHraXI6s";
+        var token = Environment.GetEnvironmentVariable("API_KEY");
         _httpClient.DefaultRequestHeaders.Authorization =
         new System.Net.Http.Headers.AuthenticationHeaderValue(
             "Bearer",
